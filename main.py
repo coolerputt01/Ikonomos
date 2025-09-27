@@ -22,16 +22,16 @@ def notification_handler(title,content):
 def battery_manager(battery_data):
 	battery_percent = battery_data.get("percentage")
 	battery_status = battery_data.get("status")
+	text_to_speech("Coolerpuutt has a notification")
 	if battery_status != "CHARGING":
 		if battery_percent < 15:
-			print("Please plug your phone as it is very low")
+			notification_handler("15 < Battery > 0","Please plug your phone as it is very low")
 		elif battery_percent > 15 and battery_percent < 75:
-			print("Still surviving")
+			notification_handler("75 < Battery > 15","Still surviving")
 		elif battery_percent > 75 and battery_percent <= 100:
-			print("Nice Battery you have there")
+			notification_handler("100 < Battery > 75","Nice Battery you have there")
 	else:
 		notification_handler("Phone Charging","We charging here!")
-		text_to_speech("You have a notification")
 
 battery = run_cmd("termux-battery-status")
 battery_data = json.loads(battery)
